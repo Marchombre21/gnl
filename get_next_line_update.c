@@ -19,7 +19,9 @@ char	*ft_check_save(int fd, char *save)
 
 	nb_char = 1;
 	s = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	while (ft_strchr(save, '\n') != -1 && nb_char != 0)
+	if (!s)
+		return (NULL);
+	while (ft_strchr(save, '\n') == -1 && nb_char != 0)
 	{
 		nb_char = read(fd, s, BUFFER_SIZE);
 		if (nb_char == -1)
@@ -89,6 +91,8 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	save = ft_check_save(fd, save);
+	if (!save)
+		return (NULL);
 	line = ft_get_line(save);
 	save = ft_new_save(save);
 	return (line);
