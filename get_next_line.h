@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/21 15:40:59 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/23 12:09:20 by bfitte           ###   ########.fr       */
+/*   Created: 2025/11/24 07:22:39 by bfitte            #+#    #+#             */
+/*   Updated: 2025/11/26 13:44:53 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 
 char	*get_next_line(int fd);
 int		ft_strchr(char *s, int c);
-char	*ft_strjoin(char *s1, char *s2, int free_1, int free_2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, size_t len);
-char	*check_results(int i, int n_char, char **remain, char *buffer);
+int		ft_strlen(char *s);
+char	*ft_free_function(char *s1, char *s2);
 
 #endif
