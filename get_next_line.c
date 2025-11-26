@@ -6,12 +6,11 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:36:20 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/26 15:32:46 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 17:30:12 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 char	*ft_free_function(char *s1, char *s2)
 {
@@ -34,7 +33,7 @@ char	*ft_check_save(int fd, char *save)
 	{
 		nb_char = read(fd, s, BUFFER_SIZE);
 		if (nb_char == -1)
-			return (ft_free_function(save, s));
+			return (ft_free_function(s, save));
 		s[nb_char] = '\0';
 		if (nb_char > 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:36:43 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/26 15:27:03 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 17:11:46 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 
 	s_len = ft_strlen(s);
 	size_malloc = 0;
-	if ((s_len - start) <= (unsigned int)len)
+	if (start >= s_len)
+		size_malloc = 0;
+	else if ((s_len - start) <= (unsigned int)len)
 		size_malloc = s_len - start;
 	else if ((s_len - start) > (unsigned int)len)
 		size_malloc = len;
@@ -83,12 +85,14 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	new_str = malloc(sizeof(char) * size_malloc + 1);
 	if (!new_str)
 		return (NULL);
-	if (s[i] != '\0' && size_malloc != 0)
-	{
-		// while (i < len && s[start])
-		while (i < size_malloc && s[start])
-			new_str[i++] = s[start++];
-	}
+	while (i < size_malloc)
+		new_str[i++] = s[start++];
+	// if (s[i] != '\0' && size_malloc != 0)
+	// {
+	// 	// while (i < len && s[start])
+	// 	while (i < size_malloc && s[start])
+	// 		new_str[i++] = s[start++];
+	// }
 	new_str[i] = '\0';
 	return (new_str);
 }
