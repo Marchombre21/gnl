@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 15:36:20 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/27 16:26:53 by bfitte           ###   ########lyon.fr   */
+/*   Created: 2025/11/27 10:52:07 by bfitte            #+#    #+#             */
+/*   Updated: 2025/11/27 16:54:25 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_free_function(char *s1, char *s2)
 {
@@ -33,7 +33,7 @@ char	*ft_check_save(int fd, char *save)
 	{
 		nb_char = read(fd, s, BUFFER_SIZE);
 		if (nb_char == -1)
-			return (ft_free_function(s, save));
+			return (ft_free_function(save, s));
 		s[nb_char] = '\0';
 		if (nb_char > 0)
 		{
@@ -96,23 +96,20 @@ char	*ft_new_save(char *save)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*save;
+	static char	*save[1024];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	save = ft_check_save(fd, save);
-	if (!save)
-	{
-		save = NULL;
 		return (NULL);
-	}
-	line = ft_get_line(save);
+	save[fd] = ft_check_save(fd, save[fd]);
+	if (!save[fd])
+		return (NULL);
+	line = ft_get_line(save[fd]);
 	if (!line)
 	{
-		free(save);
-		save = NULL;
+		free(save[fd]);
+		save[fd] = NULL;
 		return (NULL);
 	}
-	save = ft_new_save(save);
+	save[fd] = ft_new_save(save[fd]);
 	return (line);
 }
