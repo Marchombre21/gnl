@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 10:52:07 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/27 16:54:25 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 10:36:02 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	*ft_check_save(int fd, char *save)
 		s[nb_char] = '\0';
 		if (nb_char > 0)
 		{
+			// dupliquer la ligne de save dans la heap et renvoyer le ptr
+			// et memmove le restant du buffer (save) au debut du buffer
 			save = ft_strjoin(save, s);
 			if (!save)
 				return (ft_free_function(NULL, s));
@@ -96,9 +98,9 @@ char	*ft_new_save(char *save)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*save[1024];
+	static char	save[BUFFER_SIZE][1024];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 1024)
 		return (NULL);
 	save[fd] = ft_check_save(fd, save[fd]);
 	if (!save[fd])
